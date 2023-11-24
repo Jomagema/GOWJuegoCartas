@@ -1,0 +1,53 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Establecer la altura del cuerpo igual a la ventana */
+    background-image: url('img/fondo.jpg'); /* Ruta o URL de tu imagen de fondo */
+    background-size: contain; /* Ajustar el tamaño para mantener la proporción */
+    background-repeat: no-repeat; /* Evitar repetir la imagen de fondo */
+    background-position: left center; /* Centrar la imagen de fondo */
+}
+
+img {
+    opacity: 0; /* Inicialmente establece la opacidad en 0 */
+    transform: translateY(-50px); /* Desplaza la imagen hacia arriba 50px (o el valor que prefieras) */
+    transition: opacity 5s ease, transform 5s ease; /* Aplica transiciones de opacidad y transformación */
+}
+
+body.show-image img {
+    opacity: 1; /* Cuando la clase 'show-image' está presente, establece la opacidad en 1 */
+    transform: translateY(0); /* Vuelve a la posición original */
+}
+
+.menu {
+    /*flex: 0 0 auto;*/
+    background-color: #800000; /* Fondo rojo granate */
+    width: 500px; /* Ancho del div a la derecha */
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    float: right;
+    flex-direction: column;
+}
+
+.login {
+    width: 100%; /* O el ancho deseado */
+    background-color: #db3434; /* Color de fondo de la barra de login */
+    height: 6%;
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content {
+    text-align: center;
+    margin: auto;
+}
+
+button {
+    margin: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 20px;
+}
