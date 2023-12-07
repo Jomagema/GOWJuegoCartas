@@ -6,6 +6,8 @@ html,body {
     background-size: contain; /* Ajustar el tamaño para mantener la proporción */
     background-repeat: no-repeat; /* Evitar repetir la imagen de fondo */
     background-position: left center; /* Centrar la imagen de fondo */
+    background-color: #000000;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 img {
@@ -21,7 +23,9 @@ body.show-image img {
 
 .menu {
     /*flex: 0 0 auto;*/
-    background-color: #800000; /* Fondo rojo granate */
+    background-image:  url('../img/menu2.jpg');; /* Fondo rojo granate */
+    background-size: cover; /* Ajustar el tamaño para cubrir completamente el contenedor */
+    background-position: center center;
     width: 500px; /* Ancho del div a la derecha */
     height: 100%;
     display: flex;
@@ -33,7 +37,7 @@ body.show-image img {
 
 .login {
     width: 100%; /* O el ancho deseado */
-    background-color: #db3434; /* Color de fondo de la barra de login */
+    /*background-color: #8a1200; /* Color de fondo de la barra de login */
     height: 6%;
     box-sizing: border-box; /* Incluye el padding en el ancho total */
     display: flex;
@@ -50,4 +54,93 @@ button {
     padding: 8px 16px;
     font-size: 16px;
     border-radius: 20px;
+    background-color: white;
+    color: black;
+    border: none;
 }
+
+.specs {
+    margin: 1em 0;
+    padding: 8vh 0;
+    border-top: 0.5em solid #888888; /* Reemplaza var(--gris) con el valor de color gris deseado */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff; /* Reemplaza var(--blanco) con el valor de color blanco deseado */
+  }
+  
+  .specs.inverso .specs__center {
+    flex-direction: row-reverse;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .specs.inverso .specs__center {
+        flex-direction: column;
+    }
+  }
+  
+  .specs:nth-child(4) {
+    border-bottom: 0.5em solid #888888; /* Reemplaza var(--gris) con el valor de color gris deseado */
+  }
+  
+  .specs--first {
+    margin-top: 740px;
+  }
+  
+  .specs__center {
+    width: 92%;
+    max-width: 730em;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .specs__center {
+        flex-direction: column;
+    }
+  }
+  
+  .specs__col {
+    width: calc(100% / 2 - 1em);
+    position: relative;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .specs__col {
+        width: 90%;
+        text-align: center;
+    }
+  }
+  
+  .specs__h4 {
+    margin: 0 0 0.5em;
+    font-size: 3.2em;
+    font-weight: 600;
+    line-height: 1em;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .specs__h4 {
+        font-size: 1.6em;
+    }
+  }
+  
+  .specs__p {
+    font-size: 1.6em;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .specs__p {
+        font-size: 1.3em;
+    }
+  }
+  
+  .specs__overlay {
+    position: relative;
+    z-index: 2;
+    transform: scale(0.6);
+  
+  }

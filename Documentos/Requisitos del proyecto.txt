@@ -1,0 +1,12 @@
+Requisitos minimos del proyecto:
+Accesibilidad: Asegúrate de que la demostración sea accesible a través de navegadores web comunes (Chrome, Firefox, Safari, etc.) sin necesidad de descargar software adicional.
+
+Jugabilidad básica: Incluye las mecánicas de juego esenciales que permitan a los usuarios entender la dinámica y la esencia del juego. Esto podría incluir turnos de juego, movimiento de cartas, mecánicas de combate, etc.
+
+Representación del universo de God of War: Incluye elementos clave del mundo de God of War, como personajes, criaturas, poderes, armas o elementos de la mitología que caracterizan la saga.
+
+Interactividad: Asegúrate de que los jugadores puedan interactuar con las cartas o el entorno del juego de manera significativa. Puede ser a través de acciones simples como arrastrar y soltar cartas o realizar elecciones estratégicas.
+
+Experiencia atractiva: Aunque sea una demostración, busca ofrecer una experiencia atractiva y cautivadora que despierte el interés de los jugadores y les dé una idea clara de la emoción y diversión que ofrece el juego completo.
+
+Feedback y seguimiento: Incorpora una forma para que los jugadores proporcionen comentarios sobre la demostración. Puedes incluir encuestas breves, formularios de comentarios o enlaces a redes sociales donde puedan compartir sus impresiones.
