@@ -1,0 +1,19 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("../img/instrucciones/InstruccionesFondo.jpeg");
+    font-family: 'Cormorant Garamond', serif;
+    color: azure;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+  }
+
+  .box {
+    box-sizing: border-box;
+  }

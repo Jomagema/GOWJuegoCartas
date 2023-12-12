@@ -1,19 +1,15 @@
 * {
-
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 body{
-
-    background-image: url(../img/registro.jpg);
+    background-image: url(../img/login/kratosFondo.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.9;
-
-
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .form-register {
@@ -22,10 +18,8 @@ body{
     background:#000000;
     margin: auto;
     padding: 20px;
-    margin-top: 35px;
-    margin-bottom: 40px;
+    margin-top: 250px;
     border-radius: 4px;
-    font-family: 'Arial', Courier, monospace;
     color:white;
     box-shadow: 7px 13px 37px #131212;
 }
@@ -44,9 +38,8 @@ body{
     background: #2c2727;
     padding: 5%;
     border-radius: 4px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     border: 1px solid #909296;
-    font-family: 'Arial', Courier, monospace;
     color:white;
     font-size: 15px;
 
@@ -54,10 +47,10 @@ body{
 
 .form-register p {
 
-    font-family: 'Arial', Courier, monospace;
     font-size: 20px;
     color: grey;
     margin-top: 10px;
+    text-align: center;
 }
 
 .form-register a {
@@ -68,8 +61,10 @@ body{
 }
 
 .botons {
-    margin: 10px;
+    margin-top: 40px;
     padding: 8px 16px;
     font-size: 16px;
     border-radius: 20px;
+    text-align: center;
+    margin-left: 160px;
 }

@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author">
-    <title> Registro </title>
+    <title>Inicio Sesion</title>
     <link rel="stylesheet" href="css/login.css">
-    <script src="ValidarRegistro.js"></script>
-
+    <link rel="icon" href="img/icono.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,700" />
 </head>
 <body>
-
     <section class="form-register">
-     
-    <h4>Registro</h4>
+        <h4>Iniciar Sesion</h4>
+        <form name="formulario" method="post">
+            <input class="controls" type="email" name="email" placeholder="Correo electrónico">
+            <input class="controls" type="password" id="contrasena" name="contrasena" placeholder="Contraseña">
 
-    <form name="formulario" method="post" action="BaseDedatos.php" >
+            <p>¿Aun no te has registrado?<a href="registro.html"> Registrate</a></p>
 
-                <input class ="controls" type="email" name="email" placeholder="Correo electrónico"> 
+            <input class="botons" type="submit" name="iniciarsesion" value="Iniciar Sesión">
 
-                <input class ="controls" type="password" id="contrasena" name="contrasena" placeholder="Contraseña" >
-                
-                <input class ="controls" type="password" id="confcontrasena" name="confcontrasena" placeholder="Confirmar contraseña">
 
-                <input class ="botons" type="submit" name="registrarse" value="Registrarse"> 
-    </form>
-
+        </form>
     </section>
+
+
+    
 
 </body>
 </html>

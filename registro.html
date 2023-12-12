@@ -5,6 +5,8 @@
     <meta name="author">
     <title> Registro </title>
     <link rel="stylesheet" href="css/registro.css">
+    <link rel="icon" href="img/icono.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,700" />
     <script src="ValidarRegistro.js"></script>
 
 </head>
@@ -14,7 +16,17 @@
      
     <h4>Registro</h4>
 
-    <form name="formulario" method="post" action="BaseDedatos.php" >
+    <p>Elige tu avatar para empezar la batalla</p>
+
+    <div class="avatar-container">
+        <img class="flecha" src="img/avatares/izquierda.png" onclick="cambiarImagen(-1)">
+        <img id="imagen" src="img/avatares/AvatarKratos.jpg" alt="Imagen">
+        <img class="flecha" src="img/avatares/derecha.png" onclick="cambiarImagen(1)">
+    </div>
+
+    <form name="formulario" method="post">
+
+                <input class ="controls" type="text" name="usuario" placeholder="Usuario"> 
 
                 <input class ="controls" type="email" name="email" placeholder="Correo electrónico"> 
 
@@ -26,6 +38,25 @@
     </form>
 
     </section>
+
+    <script>
+        const imagenes = ["img/avatares/AvatarKratos.jpg", "img/avatares/AvatarAtreus.jpg", "img/avatares/AvatarFreya.jpg"]; // Rutas de las imágenes
+        var ruta = "img/avatares/";
+        let indiceImagenActual = 0; // Índice de la imagen actual
+        function cambiarImagen(cambio) {
+        indiceImagenActual += cambio;
+
+        // Verificar límites para el índice
+        if (indiceImagenActual < 0) {
+            indiceImagenActual = imagenes.length - 1;
+        } else if (indiceImagenActual >= imagenes.length) {
+            indiceImagenActual = 0;
+        }
+
+        // Cambiar la imagen
+        document.getElementById("imagen").src = imagenes[indiceImagenActual];
+        }
+    </script>
 
 </body>
 </html>

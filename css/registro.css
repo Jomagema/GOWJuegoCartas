@@ -1,19 +1,15 @@
 * {
-
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 body{
-
-    background-image: url(../img/registro.jpg);
+    background-image: url(../img/registro/registro.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.9;
-
-
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .form-register {
@@ -22,10 +18,9 @@ body{
     background:#000000;
     margin: auto;
     padding: 20px;
-    margin-top: 35px;
+    margin-top: 80px;
     margin-bottom: 40px;
     border-radius: 4px;
-    font-family: 'Arial', Courier, monospace;
     color:white;
     box-shadow: 7px 13px 37px #131212;
 }
@@ -46,7 +41,6 @@ body{
     border-radius: 4px;
     margin-bottom: 40px;
     border: 1px solid #909296;
-    font-family: 'Arial', Courier, monospace;
     color:white;
     font-size: 15px;
 
@@ -54,10 +48,11 @@ body{
 
 .form-register p {
 
-    font-family: 'Arial', Courier, monospace;
     font-size: 20px;
     color: grey;
     margin-top: 10px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .form-register a {
@@ -72,4 +67,25 @@ body{
     padding: 8px 16px;
     font-size: 16px;
     border-radius: 20px;
+}
+
+#imagen{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.avatar-container{
+    display: flex;
+    justify-content: center;
+}
+
+.flecha {
+    width: 32px;
+    height: 32px;
+    margin-top: 32px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
