@@ -7,13 +7,11 @@
     <link rel="stylesheet" href="css/registro.css">
     <link rel="icon" href="img/icono.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,700" />
-    <script src="ValidarRegistro.js"></script>
 
 </head>
 <body>
-
+    <a href="index.html"><button>Volver</button></a>
     <section class="form-register">
-     
     <h4>Registro</h4>
 
     <p>Elige tu avatar para empezar la batalla</p>
@@ -24,39 +22,23 @@
         <img class="flecha" src="img/avatares/derecha.png" onclick="cambiarImagen(1)">
     </div>
 
-    <form name="formulario" method="post">
+    <form name="formulario" action="php/registro.php" method="post">
 
-                <input class ="controls" type="text" name="usuario" placeholder="Usuario"> 
+                <input class="controls" type="text" name="usuario" placeholder="Usuario" required> 
 
-                <input class ="controls" type="email" name="email" placeholder="Correo electrónico"> 
+                <input class="controls" type="email" name="email" placeholder="Correo electrónico" required> 
 
-                <input class ="controls" type="password" id="contrasena" name="contrasena" placeholder="Contraseña" >
+                <input class="controls" type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
                 
-                <input class ="controls" type="password" id="confcontrasena" name="confcontrasena" placeholder="Confirmar contraseña">
+                <input class="controls" type="password" id="confcontrasena" name="confcontrasena" placeholder="Confirmar contraseña" required>
 
-                <input class ="botons" type="submit" name="registrarse" value="Registrarse"> 
+                <input type="hidden" id="ruta_imagen" name="ruta_imagen" value="AvatarAtreus.jpg">
+                
+                <input class="botons" type="submit" name="registrarse" value="Registrarse">
     </form>
-
     </section>
 
-    <script>
-        const imagenes = ["img/avatares/AvatarKratos.jpg", "img/avatares/AvatarAtreus.jpg", "img/avatares/AvatarFreya.jpg"]; // Rutas de las imágenes
-        var ruta = "img/avatares/";
-        let indiceImagenActual = 0; // Índice de la imagen actual
-        function cambiarImagen(cambio) {
-        indiceImagenActual += cambio;
-
-        // Verificar límites para el índice
-        if (indiceImagenActual < 0) {
-            indiceImagenActual = imagenes.length - 1;
-        } else if (indiceImagenActual >= imagenes.length) {
-            indiceImagenActual = 0;
-        }
-
-        // Cambiar la imagen
-        document.getElementById("imagen").src = imagenes[indiceImagenActual];
-        }
-    </script>
+    <script src="js/registro.js"></script>
 
 </body>
 </html>

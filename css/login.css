@@ -18,7 +18,7 @@ body{
     background:#000000;
     margin: auto;
     padding: 20px;
-    margin-top: 250px;
+    margin-top: 200px;
     border-radius: 4px;
     color:white;
     box-shadow: 7px 13px 37px #131212;
@@ -67,4 +67,12 @@ body{
     border-radius: 20px;
     text-align: center;
     margin-left: 160px;
+}
+
+button{
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 20px;
+    height: 30px;
+    width: 50px;
 }

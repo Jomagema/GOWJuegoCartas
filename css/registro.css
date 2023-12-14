@@ -18,7 +18,7 @@ body{
     background:#000000;
     margin: auto;
     padding: 20px;
-    margin-top: 80px;
+    margin-top: 50px;
     margin-bottom: 40px;
     border-radius: 4px;
     color:white;
@@ -88,4 +88,12 @@ body{
     margin-top: 32px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+button{
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 20px;
+    height: 30px;
+    width: 50px;
 }
