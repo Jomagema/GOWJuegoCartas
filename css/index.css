@@ -117,6 +117,17 @@ button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+#boton img{
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+}
+
+#boton p{
+  background: rgb(77, 76, 76, 0.3);
+  color: white;
+}
+
 /*Banners pequeños informacion*/
 
 .specs {
@@ -202,8 +213,8 @@ button:hover {
     position: relative;
     z-index: 2;
     transform: scale(0.6);
-    width: 800px;
-    height: 380px;
+    width: 700px;
+    height: 350px;
   }
   
 

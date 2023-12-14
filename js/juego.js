@@ -1,6 +1,11 @@
 var personaje = {};
 var enemigo = {};
-var ronda = 1;
+var ronda = 0;
+var prob1 = 90;
+var prob2 = 10;
+var prob3 = 0;
+
+var user = obtenerValorCookie("usuario");
 
 var enemigos1 = [];
 var enemigos2 = [];
@@ -31,11 +36,10 @@ function rellenarEnemigos() {
             
         });; 
 
-
         enemigo = enemigos1[num(0, enemigos1.length-1)];
         
-        document.getElementById("enemigo").src = "data:image/png;base64,"+enemigo.imagen; 
-        document.getElementById("infoEnemigo").innerHTML = enemigo.nombre+" | Nivel:"+enemigo.nivel+"<br>"+"Vida: "+enemigo.vida+" | Ataque: "+enemigo.ataque; 
+        document.getElementById("enemigo").src = "data:image/png;base64,"+enemigo.imagen;
+        actualizarDatos();
         
     })
     .catch(error => {
@@ -75,8 +79,12 @@ function datosPersonaje() {
         
         personaje = data; 
         personaje.mano = 3;
+        personaje.escudo = 0;
+        personaje.vida = personaje.vida_maxima;
         
         document.getElementById("jugador").src = "data:image/png;base64," + personaje.imagen;
+        actualizarDatos();
+
     })
     .catch(error => {
         console.error('Hubo un problema con la solicitud fetch:', error);
@@ -106,22 +114,20 @@ function rellenarCartas() {
             }   
         });
         
-        console.log(personaje)
     })
     .catch(error => {
         console.error('Hubo un problema con la solicitud fetch:', error);
     });
+
 }
 
 window.onload = function() {
-    //actualizarDatos();
-    //repartirCartas();
     rellenarRecompensas();
     rellenarEnemigos();
     datosPersonaje();
     rellenarCartas();
+    
 }
-
 
 function finTurno() {
    ataqueEnemigo();
@@ -130,48 +136,62 @@ function finTurno() {
 
 function repartirCartas() {
     let cartas = document.getElementById("cartas");
+    let mano = [];
     while(cartas.firstChild){
         cartas.removeChild(cartas.firstChild);
     }
 
-    for (let index = 1; index <= kratos.tamanio_mazo; index++) {
-        //Crea un elemento de tipo boton
-        var carta = document.createElement('button');
+    for (let index = 1; index <= personaje.mano; index++) {
+        var carta = document.createElement('img');
 
-        //Genera el tipo de accion y su valor
-        let tipo = tipos[num(0,2)];
-        let valor = num(1,3);
-
-        console.log(tipo, valor)
-        //Asigna los datos al elemento
+        let indice = num(0,personaje.mazo.length-1);
+        let tipo = personaje.mazo[indice].tipo;
+        let valor = personaje.mazo[indice].valor;
+        carta.src = "data:image/png;base64," + personaje.mazo[indice].imagen;
+        
         carta.id = index;
         // Asigna una función al evento onclick del botón
         carta.onclick = function() {
             accion(tipo, valor, index);
         };
-        carta.textContent = tipo+" ("+valor+")";
-
-        console.log(carta)
 
         //Mete el elemento en el div
         cartas.appendChild(carta);
+
+        mano.push(personaje.mazo[indice]);
+        personaje.mazo.splice(indice, 1);
     }
+
+    mano.forEach(c => {
+        personaje.mazo.push(c);
+    });
     
 }
 
 function accion(tipo, valor, id) {
+    let registro = document.getElementById("feed");
+    let red = 0;
+    valor = parseInt(valor);
     if(tipo == "Daño"){
+        red = bloqueo[num(0, bloqueo.length-1)];
+        valor = valor - red;
+        if (valor < 0){
+            valor = 0;
+        }
         enemigo.vida -= valor;
         if(enemigo.vida < 0){
             enemigo.vida = 0;
         }
-    }else if (tipo == "Curar") {
-        kratos.vida += valor;
-        if (kratos.vida > kratos.vida_maxima){
-            kratos.vida = kratos.vida_maxima;
+        registro.innerHTML = registro.innerHTML + "<p style='color:palegreen'>"+personaje.nombre+" hace "+parseInt(valor)+" puntos de daño (bloquea " +red+")</p><br>";
+    }else if (tipo == "Cura") {
+        personaje.vida += valor;
+        if (personaje.vida >= personaje.vida_maxima){
+            personaje.vida = personaje.vida_maxima;
         }
+        registro.innerHTML = registro.innerHTML + "<p style='color:palegreen'>"+personaje.nombre+" se cura "+parseInt(valor)+" puntos de vida</p><br>";
     } else if (tipo == "Escudo"){
-        kratos.escudo += valor;
+        personaje.escudo += parseInt(valor);
+        registro.innerHTML = registro.innerHTML + "<p style='color:palegreen'>"+personaje.nombre+" se refuerza "+parseInt(valor)+" puntos de escudo</p><br>";
     }
     actualizarDatos();
     let borrar = document.getElementById(id);
@@ -184,25 +204,51 @@ function num(min, max) {
 }
 
 function actualizarDatos() {
-    document.getElementById("stats").textContent = "Nombre: "+kratos.nombre+" | Vida: "+kratos.vida+" | Escudo: "+kratos.escudo;
-    document.getElementById("statsEnemigo").textContent = "Nombre: "+enemigo.nombre+" | Vida: "+enemigo.vida;
+    document.getElementById("infoJugador").textContent = "Vida: "+personaje.vida+" | Escudo: "+personaje.escudo; 
+    document.getElementById("infoEnemigo").innerHTML = enemigo.nombre+" | Nivel:"+enemigo.nivel+"<br>"+"Vida: "+enemigo.vida+" | Ataque: "+enemigo.ataque;
+}
+
+function actualizarRondas() {
+    ronda++;
+    document.getElementById("rondas").textContent = "Ronda "+ronda;
+    if(ronda == 3){
+        prob1 = 80;
+        prob2 = 15;
+        prob3 = 5;
+    } else if (ronda == 6){
+        prob1 = 70;
+        prob2 = 20;
+        prob3 = 10; 
+    } else if (ronda == 9){
+        prob1 = 50;
+        prob2 = 30;
+        prob3 = 20; 
+    }
 }
 
 function resultado() {
     if(enemigo.vida <= 0){
-        alert("Has ganado");
-    } else if(kratos.vida <= 0){
-        alert("Has perdido");
+        generarRecompensa();
+    } else if(personaje.vida <= 0){
+        actualizarRecord();
+        alert("Record Rondas: " +ronda);
+        window.location.href = "index.html";
     }
 }
 
 function ataqueEnemigo() {
-   let daño = enemigo.ataque;
-   let registro = document.getElementById("registro")
-   
-   for (let index = 0; index < enemigo.nivel; index++) {
+    let registro = document.getElementById("feed")
+    let red = 0;
+    
+    for (let index = 0; index < enemigo.nivel; index++) {
+        let daño = enemigo.ataque;
+        red = bloqueo[num(0, bloqueo.length-1)];
+        daño = daño - red;
+        if (daño < 0){
+            daño = 0;
+        }
+        registro.innerHTML = registro.innerHTML + "<p style='color:darksalmon'>"+enemigo.nombre+" hace "+parseInt(daño)+" puntos de daño (bloquea " +red+")</p><br>";
     if(personaje.escudo == 0){
-        registro.innerHTML += "<p>"+enemigo.nombre+" hace "+personaje.vida - daño+"</p><br>";
         personaje.vida -= daño;
     } else if (personaje.escudo > 0){
         personaje.escudo -= daño;
@@ -212,8 +258,157 @@ function ataqueEnemigo() {
         }
     }
 
+    if(personaje.vida < 0){
+        personaje.vida = 0;
+    }
+
+    }
+    resultado();
     actualizarDatos();
-    resultado(); 
-   }
-    
+}
+
+function finTurno() {
+    ataqueEnemigo();
+    repartirCartas();
+}
+
+function generarRecompensa() {
+    let tab = document.getElementById("feed");
+    document.getElementById("rondas").textContent = "Elige tu recompensa";
+    tab.innerHTML = "";
+    let cartas = document.getElementById("cartas");
+    while(cartas.firstChild){
+        cartas.removeChild(cartas.firstChild);
+    }
+    let table = document.createElement("table");
+    let tr = document.createElement("tr");
+    let td;
+    let indice;
+    let usadas = [];
+    let img;
+    let p;
+
+    for (let index = 0; index < 3; index++) {
+        td = document.createElement("td");
+        indice = num(0, recompensas.length-1);
+        usadas.push(recompensas[indice]);
+        img = document.createElement("img");
+        img.src="data:image/png;base64,"+recompensas[indice].imagen;
+        img.onclick = function() {
+            añadirRecompensa(recompensas[indice].tipo, recompensas[indice].valor,recompensas[indice].imagen);
+        }
+
+        p = document.createElement("p");
+        p.textContent = recompensas[indice].descripcion;
+        td.appendChild(img);
+        td.appendChild(p);
+
+        tr.appendChild(td);
+    }
+
+    table.appendChild(tr);
+
+    tab.appendChild(table);
+}
+
+function añadirRecompensa(tipo, valor, imagen) {
+    if(tipo == "Escudo" || tipo == "Ataque" || tipo == "Cura"){
+        let carta = {
+            valor: valor,
+            tipo: tipo,
+            imagen: imagen
+        }
+        personaje.mazo.push(carta);
+        console.log(carta);
+        console.log(personaje);
+    } else if(tipo == "Mazo"){
+        personaje.mano = parseInt(personaje.mano) + 1;
+    } else if(tipo == "Vida"){
+        personaje.vida_maxima = parseInt(personaje.vida_maxima) + parseInt(valor);
+        if (personaje.vida != personaje.vida_maxima) {
+            personaje.vida = parseInt(personaje.vida) + parseInt(valor);
+        }
+    }
+    actualizarDatos();
+    actualizarRondas();
+    limpiarFeed()
+    generarEnemigo(prob1,prob2,prob3);
+    repartirCartas();
+}
+
+function comenzar() {
+    repartirCartas();
+    let borrar = document.getElementById("comenzar");
+    borrar.parentNode.removeChild(borrar);
+    actualizarRondas();
+    if(user == "admin"){
+        document.getElementById("admin").innerHTML += "<button onclick='repartirCartas()'>Cartas</button>";
+        document.getElementById("admin").innerHTML += "<button onclick='generarRecompensa()'>Recompensas</button>";
+        document.getElementById("admin").innerHTML += "<button onclick='generarEnemigo(50,30,20)'>Enemigo</button>";
+        document.getElementById("admin").innerHTML += "<button onclick='daño()'>Daño</button>";
+
+    }
+}
+
+function limpiarFeed() {
+    let feed = document.getElementById("feed");
+    feed.innerHTML= "";
+}
+
+function generarEnemigo(num1, num2, num3) {
+    let n = num(0, 100);
+    if (n >= 0 && n < num1) {
+        enemigo = enemigos1[num(0, enemigos1.length-1)];
+    } else if(n >= num1 && n < num1 + num2){
+        enemigo = enemigos2[num(0, enemigos2.length-1)];
+    } else if(n >= num1 + num2 && n <= 100){
+        enemigo = enemigos3[num(0, enemigos3.length-1)];
+    }
+    console.log(n);
+    console.log(enemigo);
+    document.getElementById("enemigo").src = "data:image/png;base64,"+enemigo.imagen;
+    actualizarDatos();
+}
+
+function obtenerValorCookie(nombreCookie) {
+    var nombre = nombreCookie + "=";
+    var cookies = document.cookie.split(';');
+  
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+  
+      // Verificar si la cookie comienza con el nombre proporcionado
+      if (cookie.indexOf(nombre) === 0) {
+        // Extraer y devolver el valor de la cookie
+        return cookie.substring(nombre.length, cookie.length);
+      }
+    }
+  
+    // Si no se encontró la cookie, devuelve null o un valor por defecto
+    return null;
+}
+
+function daño() {
+    personaje.vida -= 1;
+    actualizarDatos();
+    resultado();
+}
+
+function actualizarRecord() {
+    const data = new FormData();
+    data.append('usuario', user);
+    data.append('nuevoRecord', ronda);
+
+const url = 'php/actualizar_record.php';
+
+const opciones = {
+    method: 'POST',
+    body: data
+};
+
+fetch(url, opciones)
+    .then(response => response.text())
+    .then(resultado => console.log(resultado))
+    .catch(error => console.error('Error:', error));
+
 }

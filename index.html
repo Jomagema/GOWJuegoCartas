@@ -20,12 +20,11 @@
             <h1>Forja tu destino nordico</h1>
         </div>
         <div class="botones">
-            <button>Personajes</button>
+            <a href="#personajes"><button>Personajes</button></a>
             <a href="juego.html"><button class="destacado">Jugar Ahora</button></a>
             <a href="instrucciones.html"><button>Instrucciones</button></a>
         </div>
-        <div class="nuevos-botones">
-                
+        <div class="nuevos-botones" id="boton">
                 <a href="login.html"><button>Iniciar Sesión</button></a>
                 <a href="registro.html"><button>Registrarse</button></a>
         </div>
@@ -59,7 +58,7 @@
 
      <article class="specs">
         <div class="contenido-centrado">
-            <h2>ELIGE A TU CAMPEÓN</h2>
+            <h2 id="personajes">ELIGE A TU CAMPEÓN</h2>
             <p>¿A quién llevarás a la batalla?</p>
             <div class="marco-imagenes">
                 <div class="character-panel" onmouseover="hoverPanel(this)" onmouseout="unhoverPanel(this)" onclick="showDescription('Kratos', 'Es un guerrero extremadamente poderoso, conocido por su pasado como el temido Dios de la Guerra en la mitología griega. Después de abandonar su tierra natal, busca redención y paz en tierras nórdicas. Kratos es fuerte, estoico y está lleno de determinación. Su pasado tormentoso lo persigue constantemente, pero intenta ser un padre compasivo y protector para su hijo, Atreus.', 'img/index/KratosGrande.jpg')">
